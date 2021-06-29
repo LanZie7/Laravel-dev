@@ -18,8 +18,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
-Route::get('/news/{news}', [NewsController::class, 'show'])->name('news.show');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
+Route::post('/news/create', [NewsController::class, 'store'])->name('news.store');
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/news/{news}', [NewsController::class, 'show'])->name('news.show');
 
-require __DIR__.'/auth.php'; // Lana Bochkova lana..gmail... 12345678
+require __DIR__.'/auth.php'; // logging in: Kate... lady... 12345678
