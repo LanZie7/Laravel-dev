@@ -24,11 +24,15 @@ class CreateNewsTest extends TestCase
 
         $category = Category::factory()->create(); // создание категории, чтобы она была в базе
 
-        $response = $this->post('/news/create', [
+        $newsData = [
             'title' => 'This is a title',
             'description' => 'This is a description',
             'category_id' => $category->id
-        ]);
+        ];
+
+        $response = $this->post('/news/create', $newsData);
+
+        $this->assertDatabaseHas('news', $newsData);
 
         $response->assertStatus(302);
         $response->assertSessionHasNoErrors();
