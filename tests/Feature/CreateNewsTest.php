@@ -13,9 +13,11 @@ class CreateNewsTest extends TestCase
 
     /**
      * A basic feature test example.
+     * @test
      *
      * @return void
      */
+
     public function test_create_success()
     {
         // Если есть проверка на пользователя (Middleware):
@@ -38,6 +40,7 @@ class CreateNewsTest extends TestCase
         $response->assertSessionHasNoErrors();
     }
 
+
     public function test_invalid_form_without_title()
     {
         $category = Category::factory()->create();
@@ -50,6 +53,7 @@ class CreateNewsTest extends TestCase
         $response->assertStatus(302);
         $response->assertSessionHasErrors(['title']);
     }
+
 
     public function test_invalid_form_with_too_long_title()
     {
@@ -65,6 +69,7 @@ class CreateNewsTest extends TestCase
         $response->assertSessionHasErrors(['title']);
     }
 
+
     public function test_invalid_form_without_description()
     {
         $category = Category::factory()->create();
@@ -77,4 +82,7 @@ class CreateNewsTest extends TestCase
         $response->assertStatus(302);
         $response->assertSessionHasErrors(['description']);
     }
+
+
+    // public function test_
 }
