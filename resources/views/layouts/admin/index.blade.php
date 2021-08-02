@@ -1,9 +1,10 @@
-<!DOCTYPE html>
 <html lang="ru">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <title>@section('title') Admin Page @show</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="{{ asset('assets/admin/css/styles.css')}}" rel="stylesheet" />
@@ -20,7 +21,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Lana Bochkova 2021</div>
+                            <div class="text-muted">Copyright &copy; Сёмочкин Илья 2021</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
@@ -35,5 +36,7 @@
         <script src="{{ asset('assets/admin/js/scripts.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="{{ asset('assets/admin/js/datatables-simple-demo.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        @stack('js')
     </body>
 </html>

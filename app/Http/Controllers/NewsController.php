@@ -33,7 +33,13 @@ class NewsController extends Controller
 
     public function store(StoreNewsRequest $request)
     {
-        News::create($request->validated());
+        News::create($request->validated([
+            'title' => ['required', 'string', 'min:3', 'max:199'],
+			'category_id' => ['required', 'integer', 'min:1'],
+            'slug' => ['required'],
+			'status' => ['required'],
+			'description' => ['sometimes']
+        ]));
 
         return redirect()->route('news.index')->with('success', 'Новость успешно добавлена');
     }

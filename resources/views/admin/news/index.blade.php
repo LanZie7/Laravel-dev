@@ -27,7 +27,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($newsList as $news)
+                            @forelse ($news as $news)
                                 <tr>
                                     <td>{{ $news->id }}</td>
                                     <td>{{ $news->title }}</td>
@@ -39,8 +39,8 @@
                                     <td>{{ $news->description }}</td>
                                     <td>{{ $news->created_at }}</td>
                                     <td>
-                                        <a href="{{ route('admin.news.edit', ['news' => $news->id]) }}" style="font-size: 12px;">Ред.</a> &nbsp; | &nbsp;
-                                        <a href="javascript:;" style="font-size: 12px; color: red;">Уд.</a></td>
+                                        <a href="{{ route('admin.news.edit', ['news' => $news->id]) }}" style="font-size: 12px;">Edit</a> &nbsp; | &nbsp;
+                                        <a href="javascript:;" class="delete" rel="{{ $news->id }}" style="font-size: 12px; color: red;">Delete</a></td>
                                 </tr>
                             @empty
                                 <tr>
@@ -55,3 +55,29 @@
     </main>
 
 @endsection
+
+@push('js')
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous">
+    </script>
+    <script>
+        $(function() {
+            $(".delete").on('click', function() {
+                if(confirm("Do you confirm deleting this news?")) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: "DELETE",
+                        url: "/admin/news/" + $(this).attr('rel'),
+                        complete: function() {
+                            alert("This news has been deleted.");
+                            location.reload();
+                        }
+                    })
+                }
+            })
+        });
+    </script>
+@endpush

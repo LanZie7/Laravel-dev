@@ -14,7 +14,7 @@ class AddColorFieldInCategoriesTable extends Migration
     public function up()
     {
         Schema::table('categories', function (Blueprint $table) {
-            //
+            $table->string('color', 191)->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddColorFieldInCategoriesTable extends Migration
     public function down()
     {
         Schema::table('categories', function (Blueprint $table) {
-            //
+            $table->dropColumn('color');
         });
     }
 }

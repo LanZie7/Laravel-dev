@@ -1,4 +1,4 @@
-@extends('layouts/admin/index')
+@extends('layouts.admin.index')
 @section('title') Добавить новость - @parent @stop
 @section('content')
 
