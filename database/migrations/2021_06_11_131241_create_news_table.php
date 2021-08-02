@@ -15,13 +15,18 @@ class CreateNewsTable extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained();
-            // $table->string('slug', 191);
+            $table->foreignId('category_id')->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('title', 191);
+            $table->string('slug', 191);
             $table->string('image', 255)->nullable();
-            $table->string('title');
-            $table->text('description');
-            $table->integer('rating');
+            $table->enum('status', ['DRAFT', 'PUBLISHED', 'BLOCKED'])->default('DRAFT');
+            $table->text('description')->nullable();
+            // $table->integer('rating');
             $table->timestamps();
+
+            $table->index(['status']); // фильтрация
         });
     }
 

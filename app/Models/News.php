@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Models\News
@@ -29,17 +30,21 @@ use Illuminate\Database\Eloquent\Model;
  */
 class News extends Model
 {
-    use HasFactory;
+    // use HasFactory;
+    protected $table = "news";
 
     protected $fillable = [
-        'title',
-        'description',
         'category_id',
-        'rating'
+        'title',
+        'status',
+        'description',
+        'image',
+        'slug',
+        // 'rating'
     ];
 
-    public function category()
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 }

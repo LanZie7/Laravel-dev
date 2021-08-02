@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,7 +15,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::with('news')
+            ->select(['id', 'name', 'description', 'created_at'])
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -24,7 +30,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -35,7 +41,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = Category::create(
+            $request->only(['name', 'color', 'description'])
+        );
+
+        if($category) {
+            return redirect()->route('admin.categories.index')
+                ->with('success', 'Новость успешно создана');
+        }
+
+        return back()->with('error', 'Не удалось создать новость');
     }
 
     /**
@@ -55,9 +70,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', [
+            'category' => $category
+        ]);
     }
 
     /**
@@ -67,9 +84,18 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $categoryStatus = $category->fill(
+            $request->only(['name', 'color', 'description'])
+        )->save();
+
+        if($categoryStatus) {
+            return redirect()->route('admin.categories.index')
+                ->with('success', 'Новость успешно обновлена');
+        }
+
+        return back()->with('error', 'Не удалось обновить новость');
     }
 
     /**
@@ -78,7 +104,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
         //
     }

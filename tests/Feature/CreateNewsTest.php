@@ -82,7 +82,4 @@ class CreateNewsTest extends TestCase
         $response->assertStatus(302);
         $response->assertSessionHasErrors(['description']);
     }
-
-
-    // public function test_
 }

@@ -8,9 +8,9 @@ class NewsObserver
 {
     public function creating(News $news)
     {
-        if (!$news->rating) {
-            $news->rating = rand(1, 5);
-        }
+        // if (!$news->rating) {
+        //     $news->rating = rand(1, 5);
+        // }
 
         \Log::info("Model is creating. ID: {$news->id}");
     }

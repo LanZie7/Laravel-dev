@@ -25,10 +25,27 @@ class UpdateNewsRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['string', 'min:10', 'max:100'],
-            'description' => ['string', 'max:300'],
-            'category_id' => ['integer', 'exists:categories,id'],
-            'rating' => ['integer', 'min:1', 'max:5'],
+            'title' => ['required', 'string', 'min:3', 'max:199'],
+			'category_id' => ['required', 'integer', 'min:1'],
+			'status' => ['required'],
+            'slug' => ['required'],
+			'image' => ['sometimes'],
+			'description' => ['required']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'required' => 'Необходимо заполнить поле :attribute'
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'title' => 'Заголовок'
+        ];
+    }
+
 }

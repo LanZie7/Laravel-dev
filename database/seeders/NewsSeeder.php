@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
+use App\Models\News;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 
-class CategorySeeder extends Seeder
+class NewsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,10 +15,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        // Category::factory(5)->create();
-
-        \DB::table('categories')->insert($this->getData());
-
+        \DB::table('news')->insert($this->getData());
     }
 
     public function getData() : array
@@ -26,15 +23,20 @@ class CategorySeeder extends Seeder
         $faker = Factory::create();
         $data = [];
 
-        for($i = 0; $i < 10; $i++) {
-			$data[] = [
-				'name' => $faker->sentence(mt_rand(3,10)),
+        for($i = 0; $i <10; $i++) {
+            $title = $faker->sentence(mt_rand(3,10));
+            $slug = \Str::slug($title);
+            $data[] = [
+                'category_id' => 1,
+				'title' => $title,
 				'description' => $faker->text(250),
-				'color' => $faker->hexColor,
+				'slug' => $slug,
 				'created_at' => now(),
 				'updated_at' => now()
-			];
-		}
+            ];
+        }
+
         return $data;
     }
+
 }

@@ -24,7 +24,6 @@ Route::get('/admin/categories{id}/news', [AdminCategoryController::class, 'filte
     ->name('admin.categories.filter');
 
 
-
 //user
 Route::get('/', function () {
     return view('index');

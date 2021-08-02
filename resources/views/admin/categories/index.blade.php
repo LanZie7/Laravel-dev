@@ -1,4 +1,4 @@
-@extends('layouts/admin/index')
+@extends('layouts.admin.index')
 @section('title') Список категорий - @parent @stop
 @section('content')
 
@@ -26,12 +26,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @forelse ($categoryList as $category)
+                        @forelse ($categories as $category)
                             <tr>
                                 <td>{{ $category->id }}</td>
                                 <td>
                                     <a href="{{ route('admin.categories.filter', ['id' => $loop->iteration]) }}">
-                                        {{ $category->title }}
+                                        {{ $category->name }}
                                     </a>
                                 </td>
                                 <td>{{ $category->description }}</td>
