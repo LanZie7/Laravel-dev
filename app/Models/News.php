@@ -34,7 +34,8 @@ class News extends Model
     protected $fillable = [
         'title',
         'description',
-        'category_id'
+        'category_id',
+        'rating'
     ];
 
     public function category()

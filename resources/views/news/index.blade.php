@@ -3,7 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('News') }}
         </h2>
-        <a href="{{ route('news.create') }}">Create</a>
+        <a class="bg-blue-200 text-blue-700 px-3 px-2 rounded-lg" href="{{ route('news.create') }}">Create</a>
     </x-slot>
 
     <x-content-body>
