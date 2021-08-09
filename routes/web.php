@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Account\IndexController as AccountIndexController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\IndexController;
@@ -11,14 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 
 //main page for the admin ???
-Route::get('/admin', [MainController::class, 'index'])->name('main');
-
-//admin
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
-    Route::view('/admin/profile', 'admin.index');
-    Route::resource('/categories', AdminCategoryController::class);
-    Route::resource('/news', AdminNewsController::class);
-});
+Route::get('/admin', [MainController::class, 'index'])->name('admin.main');
 
 Route::get('/admin/categories{id}/news', [AdminCategoryController::class, 'filter'])
     ->name('admin.categories.filter');
@@ -40,7 +34,32 @@ Route::post('/news/create', [NewsController::class, 'store'])->name('news.store'
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 Route::get('/news/{news}', [NewsController::class, 'show'])->name('news.show');
 
-Route::resource('feedback', FeedbackController::class);
-Route::view('/feedback', 'feedback')->name('feedback');
+// Route::resource('feedback', FeedbackController::class);
+// Route::view('/feedback', 'feedback')->name('feedback');
 
-require __DIR__.'/auth.php';
+Route::get('session', function () {
+    session(['newSession' => 'newValue']);
+    if(session()->has('newSession')) {
+        session()->remove('newSession');
+    }
+    return "There is no sessions";
+});
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/account', AccountIndexController::class)->name('account');
+    Route::get('/logout', function () {
+        \Auth::logout();
+        return redirect()->route('login');
+    })->name('logout');
+
+    //admin
+    Route::group(['prefix' => 'admin','middleware' => 'admin', 'as' => 'admin'], function() {
+        Route::view('/', 'admin.index')->name('index');
+        Route::resource('categories', AdminCategoryController::class);
+        Route::resource('news', AdminNewsController::class);
+    });
+});
+
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
