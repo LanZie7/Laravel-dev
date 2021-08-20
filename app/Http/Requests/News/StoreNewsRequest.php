@@ -29,8 +29,24 @@ class StoreNewsRequest extends FormRequest
             'title' => ['required', 'string', 'min:10', 'max:100'],
             'description' => ['required', 'string', 'max:300'],
             'category_id' => ['required', 'integer', 'exists:categories,id'],
-            // 'status' => ['required'],
+            'status' => ['required'],
+            'image' => ['sometimes'],
             // 'rating' => ['integer', 'min:1', 'max:5'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required' => 'Необходимо заполнить поле :attribute'
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'title' => 'Заголовок',
+            'description' => 'Описание'
         ];
     }
 }
