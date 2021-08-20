@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Admin\MainController;
+use App\Http\Controllers\Admin\ParserController;
 use App\Models\Category;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
@@ -47,17 +48,19 @@ Route::get('session', function () {
 
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/account', AccountIndexController::class)->name('account');
+    Route::get('/account', AccountIndexController::class)->name('index');
     Route::get('/logout', function () {
         \Auth::logout();
         return redirect()->route('login');
     })->name('logout');
 
     //admin
-    Route::group(['prefix' => 'admin','middleware' => 'admin', 'as' => 'admin'], function() {
-        Route::view('/', 'admin.index')->name('index');
+    Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], function() {
+        Route::view('/', 'admin.index')->name('main');
         Route::resource('categories', AdminCategoryController::class);
         Route::resource('news', AdminNewsController::class);
+
+        Route::get('/parse', ParserController::class);
     });
 });
 
