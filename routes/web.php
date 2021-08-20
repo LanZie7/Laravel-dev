@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 
 //main page for the admin ???
-Route::get('/admin', [MainController::class, 'index'])->name('admin.main');
+// Route::get('/admin', [MainController::class, 'index'])->name('admin.main');
 
 Route::get('/admin/categories{id}/news', [AdminCategoryController::class, 'filter'])
     ->name('admin.categories.filter');
