@@ -20,7 +20,7 @@
             </a>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="{{ route('main') }}" class="nav-link px-2 link-dark">Главная</a></li>
+                <li><a href="{{ route('admin.main') }}" class="nav-link px-2 link-dark">Главная</a></li>
                 <li><a href="{{ route('admin.news.index') }}" class="nav-link px-2 link-dark">Новости</a></li>
                 <li><a href="{{ route('admin.categories.index') }}" class="nav-link px-2 link-dark">Категории</a></li>
                 <li><a href="#" class="nav-link px-2 link-dark">FAQ</a></li>
