@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Contracts\ParserContract;
 use App\Models\News;
 use App\Observers\NewsObserver;
+use App\Services\ParserService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,7 +17,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            ParserContract::class,
+            ParserService::class
+        );
     }
 
     /**
