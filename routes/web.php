@@ -12,7 +12,11 @@ use Illuminate\Support\Facades\Route;
 
 
 //main page for the admin ???
+<<<<<<< HEAD
 Route::get('/admin', [MainController::class, 'index'])->name('admin.main');
+=======
+// Route::get('/admin', [MainController::class, 'index'])->name('admin.main');
+>>>>>>> Lesson_8-Laravel-Middleware-Sessions-Auth
 
 Route::get('/admin/categories{id}/news', [AdminCategoryController::class, 'filter'])
     ->name('admin.categories.filter');
@@ -54,8 +58,13 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('logout');
 
     //admin
+<<<<<<< HEAD
     Route::group(['prefix' => 'admin','middleware' => 'admin', 'as' => 'admin'], function() {
         Route::view('/', 'admin.index')->name('index');
+=======
+    Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
+        Route::view('/', 'admin.index')->name('main');
+>>>>>>> Lesson_8-Laravel-Middleware-Sessions-Auth
         Route::resource('categories', AdminCategoryController::class);
         Route::resource('news', AdminNewsController::class);
     });
