@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 // use App\Rules\CorrectWords;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateNewsRequest extends FormRequest
+class NewsUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -44,7 +44,8 @@ class UpdateNewsRequest extends FormRequest
     public function attributes()
     {
         return [
-            'title' => 'Заголовок'
+            'title' => 'Заголовок',
+            'description' => 'Описание'
         ];
     }
 

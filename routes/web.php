@@ -54,10 +54,12 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('logout');
 
     //admin
-    Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
-        Route::view('/', 'admin.index')->name('main');
+    Route::group(['prefix' => 'admin','middleware' => 'admin', 'as' => 'admin.'], function() {
+        Route::view('/', 'admin.index')->name('index');
         Route::resource('categories', AdminCategoryController::class);
         Route::resource('news', AdminNewsController::class);
+
+        Route::get('/parse', ParserController::class);
     });
 });
 
