@@ -2,13 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
-use App\Models\News;
-use App\Models\User;
-use Database\Factories\NewsFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
+
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,7 +17,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Category::factory(5)->create();
+        $this->call([
+            CategorySeeder::class,
+            NewsSeeder::class
+        ]);
 
         User::create([
             'name' => 'Admin',

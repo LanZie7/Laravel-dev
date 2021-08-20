@@ -16,11 +16,8 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = \Auth::user();
-        if($user->is_admin === false) {
-            abort(404);
-            // return redirect()->route('account');
-        }
+        abort_if(!\Auth::user()->is_admin, 404);
+
         return $next($request);
     }
 }
