@@ -25,7 +25,7 @@ class ParserService implements ParserContract
             ],
             'news' => [
                 'uses' => 'channel.item[title,link,guid,description,pubDate]'
-            ],
+            ]
         ]);
 
         return $data;

@@ -1,5 +1,7 @@
 <?php
 
+use DebugBar\DebugBar;
+
 return [
 
     /*
@@ -139,6 +141,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        Barryvdh\Debugbar\ServiceProvider::class,
         Orchestra\Parser\XmlServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -191,8 +194,9 @@ return [
 
     'aliases' => [
 
-        'App' => Illuminate\Support\Facades\App::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'XmlParser' => Orchestra\Parser\Xml\Facade::class,
+        'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
