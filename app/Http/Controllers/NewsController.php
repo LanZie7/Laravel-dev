@@ -7,6 +7,7 @@ use App\Http\Requests\NewsShowRequest;
 use App\Http\Requests\UpdateNewsRequest;
 use App\Models\Category;
 use App\Models\News;
+use Request;
 
 class NewsController extends Controller
 {
@@ -50,9 +51,9 @@ class NewsController extends Controller
         return view('news.update', compact('categories', 'news'));
     }
 
-    public function update(News $news, UpdateNewsRequest $request)
+    public function update(News $news, Request $request)
     {
-        $news->update($request->validated());
+        $news->update($request->validate());
 
         //@TODO add event on update
 
