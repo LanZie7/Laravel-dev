@@ -3,12 +3,13 @@
 namespace App\Services;
 
 use App\Contracts\ParserContract;
+use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class ParserService implements ParserContract
 {
     public function getParsedList(string $url) : array
     {
-        $xml = \XmlParser::load($url);
+        $xml = XmlParser::load($url);
 
         $data = $xml->parse([
             'title' => [
